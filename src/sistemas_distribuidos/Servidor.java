@@ -6,7 +6,7 @@ import java.net.*;
 public class Servidor {
 
     private final int PUERTO = 1234; //Puerto para la conexi�n
-    private final String HOST = "localhost"; //Host para la conexi�n
+    private final String HOST = "10.226.162.219"; //Host para la conexi�n
     private String mensajeServidor; //Mensajes entrantes (recibidos) en el servidor    
     sv_interfaz interfaz = null;
 
