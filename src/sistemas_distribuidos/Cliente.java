@@ -6,11 +6,11 @@ import java.net.*;
 
 public class Cliente {
 
-    private final int PUERTO = 1234; //Puerto para la conexi�n
-    private final String HOST = "localhost"; //Host para la conexi�n
+    private final int PUERTO = 5678; //Puerto para la conexi�n
+    private final String HOST = "192.168.43.211"; //Host para la conexi�n
     private String mensajeServidor; //Mensajes entrantes (recibidos) en el servidor
     cl_interfaz interfaz;
-
+        
     public String getMensajeServidor() {
         return mensajeServidor;
     }
