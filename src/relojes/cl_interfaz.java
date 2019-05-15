@@ -5,6 +5,7 @@
  */
 package relojes;
 
+import java.awt.event.KeyEvent;
 import sistemas_distribuidos.*;
 import java.io.IOException;
 import java.text.DateFormat;
@@ -129,14 +130,16 @@ public class cl_interfaz extends javax.swing.JFrame {
     }//GEN-LAST:event_mensaje_clienteActionPerformed
 
     private void mensaje_clienteKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_mensaje_clienteKeyPressed
-
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            this.enviar_mensaje_ui();
+        }
     }//GEN-LAST:event_mensaje_clienteKeyPressed
     public void actualiza_conversasion(String mensaje) {
         System.out.println(mensaje);
         chat_area.setText(chat_area.getText() + "\n" + mensaje);
     }
-    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
-        //cli.startClient(); //el cliente envia mensajes al servidor 
+
+    public void enviar_mensaje_ui() {
         String mensaje = mensaje_cliente.getText();
         try {
             this.cliente.enviar_mensaje(mensaje);
@@ -145,6 +148,10 @@ public class cl_interfaz extends javax.swing.JFrame {
         } catch (IOException ex) {
             Logger.getLogger(cl_interfaz.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+        //cli.startClient(); //el cliente envia mensajes al servidor 
+        this.enviar_mensaje_ui();
     }//GEN-LAST:event_jButton1MouseClicked
 
     /**

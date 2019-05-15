@@ -19,6 +19,7 @@ public class Servidor {
     String mensajeServidor; //Mensajes entrantes (recibidos) en el servidor    
     sv_interfaz interfaz = null;
     Long suma;
+    String menu = "* SINCRONIZAR :Se recolectan las horas de todos los clientes conectados\n* ESTABLECER: Se envia y establece a cada uno de los clientes un promedio de las horas obtenidas con el comando SINCRONIZAR\n* CLEAR reincia los valores de horas recolectadas en sincronizaciones anteriores\n* REINICIAR: Se establece una hora aleratoria para cada uno de los clientes\n* HELP: Muestra todos los comandos disponibles, con una pequeña descripcion";
 
     public void setConversasion(String conversasion) {
         System.out.println(conversasion);
@@ -37,6 +38,12 @@ public class Servidor {
         System.out.println(numero + hora);
         this.horas.add(Long.parseLong(hora));
 
+    }
+
+    public void reiniciarContadores() {
+        this.promedio = new Long(0);
+        this.suma = new Long(0);
+        this.horas.clear();
     }
 
     public void promediarHora() {
@@ -72,6 +79,18 @@ public class Servidor {
                         salidaServidor.flush();
                     }
                     break;
+                case ">CLEAR":
+                    System.out.println("help");
+                    this.reiniciarContadores();
+                    this.setConversasion("valores restaurados");
+                    break;
+                case ">HELP":
+                    System.out.println("help");
+                    //loop through it
+                    this.setConversasion(this.menu);
+
+                    break;
+
                 default:
                     for (int index = 0; index < clientes.size(); index++) {
                         out = clientes.get(index).s.getOutputStream();
@@ -107,7 +126,7 @@ public class Servidor {
                 //Se obtiene el flujo entrante desde el cliente
                 BufferedReader entrada = new BufferedReader(new InputStreamReader(cs.getInputStream()));
                 BufferedWriter salida = new BufferedWriter(new OutputStreamWriter(cs.getOutputStream()));
-                String nombre = "Cliente--->" + contador;
+                String nombre = "Cliente #" + contador + " ";
                 Client_despachador t = new Client_despachador(cs, entrada, salida, this, nombre, contador);
                 contador++;
                 t.start(); //* inicia un nuevo hilo por cada cliente que ingresa 

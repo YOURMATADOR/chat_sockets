@@ -77,6 +77,11 @@ public class Cliente {
         this.hora_actual += 1000;
     }
 
+    public void nuevaHora() {
+        this.hora_actual = (System.currentTimeMillis() + createRandomIntBetween(-1000 * -600000 * -100000, 1000 * 100000 * 600000));
+
+    }
+
     public void setConversasion(String conversasion) {
         System.out.println(conversasion);
         this.interfaz.actualiza_conversasion(conversasion);
@@ -123,8 +128,12 @@ public class Cliente {
                             this.enviar_mensaje("MIHORA," + this.hora_actual);
                             break;
                         case "ESTABLECER":
-                            this.setConversasion("Servidor: " + message);
+                            this.setConversasion("HORA ACTUALIZADA CORRACTAMENTE");
                             this.actualizar_hora(message);
+                            break;
+                        case "REINICIAR":
+                            this.setConversasion("HORA GENERADA CORRACTAMENTE");
+                            this.nuevaHora();
                             break;
                         default:
                             this.setConversasion("Servidor: " + message);
